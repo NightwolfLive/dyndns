@@ -13,7 +13,7 @@ except FileNotFoundError:
         'api': {
             'token': '',
             'zone_name': '',
-            'subdomain': ''
+            'subdomain': 'dyndns'
         }
     }
     with open('config.yml', 'x') as file:
