@@ -4,8 +4,22 @@ from hcloud.zones import Zone, ZoneRRSet, ZoneRecord
 from requests import get
 import yaml, time
 
-with open('config.yml', 'r') as file:
-    config = yaml.safe_load(file)
+try:
+    with open('config.yml', 'r') as file:
+        config = yaml.safe_load(file)
+except FileNotFoundError:
+    print("config.yml does not exist. Generating config.yml...")
+    config = {
+        'api': {
+            'token': '',
+            'zone_name': '',
+            'subdomain': ''
+        }
+    }
+    with open('config.yml', 'x') as file:
+        yaml.dump(config, file, default_flow_style=False, sort_keys=False)
+    print("config.yml Generated. Please input input credentials. Try again after.")
+    exit()
 
 token = ""
 zone_name = ""
